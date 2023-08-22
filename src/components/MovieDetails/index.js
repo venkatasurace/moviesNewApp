@@ -4,10 +4,9 @@ import Image from "next/image";
 import React from "react";
 import CastCard from "../CastCard";
 import ReactPlayer from "react-player";
-import dynamic from "next/dynamic";
 
 const MovieDetails = (props) => {
-  console.log(props);
+  // console.log(props);
 
   const cast = props?.cast;
   const crew = props?.crew;
@@ -22,7 +21,7 @@ const MovieDetails = (props) => {
     "https://image.tmdb.org/t/p/w500/https://image.tmdb.org/t/p/w500";
 
   return (
-    <div>
+    <div className="w-full">
       <div className="w-full  flex justify-center items-center  relative px-5 py-8 ">
         <Image
           src={`${imagePath}${props.backdrop_path}`}
@@ -31,18 +30,19 @@ const MovieDetails = (props) => {
           className="w-full h-full object-center absolute -z-10  "
           alt="image"
         />
-        <div className=" lg:w-[80%]  flex flex-col  sm:flex-row  sm:items-center space-y-4 ">
-          <div className="sm:w-[40%] flex justify-center items-center">
+        <div className=" lg:w-[80%]  flex flex-col  md:flex-row  sm:items-center space-y-4 md:space-y-0  ">
+          <div className="md:w-[50%] flex justify-center items-center">
             <Image
               height={300}
               width={400}
               src={`${imagePath}${props.poster_path}`}
-              className="w-[300px] h-[400px] sm:hidden"
+              className="w-[300px] h-[320px] md:h-full sm:hidden"
               alt="image"
             />
-            <div className="hidden sm:block">
-              {key && (
+            <div className="hidden w-full sm:block">
+              {key ? (
                 <ReactPlayer
+                  controls={true}
                   height={300}
                   width={400}
                   light={
@@ -50,16 +50,24 @@ const MovieDetails = (props) => {
                       height={300}
                       width={400}
                       src={`${imagePath}${props.poster_path}`}
-                      className="w-[90%] h-[380px] mb-6"
+                      className="w-[90%] h-[340px] mb-6"
                       alt="image"
                     />
                   }
                   url={`https://youtu.be/${key}`}
                 />
+              ) : (
+                <Image
+                  height={300}
+                  width={400}
+                  src={`${imagePath}${props.poster_path}`}
+                  className="w-[300px] h-[340px] mb-6"
+                  alt="image"
+                />
               )}
             </div>
           </div>
-          <div className="sm:w-[60%] backdrop-brightness-50 p-4 space-y-2">
+          <div className="md:w-[50%] backdrop-brightness-50 px-4 space-y-2 md:space-y-0">
             <h1 className="text-white text-2xl font-extrabold italic ">
               {props?.title}
             </h1>
@@ -95,17 +103,17 @@ const MovieDetails = (props) => {
         </div>
       </div>
 
-      <h1 className="text-lg font-bold text-black my-3 text-center">Cast</h1>
-      <div className="flex flex-col overflow-x-auto w-full ">
+      <h1 className="font-bold text-white my-3 text-2xl  text-center">Cast</h1>
+      <div className="flex flex-col  overflow-x-auto w-full ">
         <div className="flex  space-x-4 pt-4 ">
           {cast?.map((e, idx) => (
             <CastCard key={idx} {...e} />
           ))}
         </div>
       </div>
-      <h1 className="text-lg font-bold text-black my-3 text-center">Crew</h1>
-      <div className="flex flex-col overflow-x-auto w-full ">
-        <div className="flex  space-x-4 pt-4 ">
+      <h1 className=" font-bold text-white my-3 text-2xl  text-center">Crew</h1>
+      <div className="flex flex-col  overflow-x-auto w-full ">
+        <div className="flex  space-x-4  ">
           {crew?.map((e, idx) => (
             <CastCard crew_name={"crew"} key={idx} {...e} />
           ))}

@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { data } from "autoprefixer";
 
 const baseUrl = process.env.NEXT_PUBLIC_BACKEND_BASEURL;
 const API_KEY =
@@ -16,16 +17,19 @@ const restApi = createApi({
   }),
   endpoints: (builder) => ({
     getMovies: builder.query({
-      query: (data) => `${data.tab}`,
+      query: (data) => `movie/${data.tab}`,
     }),
     getMovieById: builder.query({
-      query: (data) => `${data.id}`,
+      query: (data) => `movie/${data.id}`,
     }),
     getMovieDetailsCast: builder.query({
-      query: (data) => `${data.id}/credits`,
+      query: (data) => `movie/${data.id}/credits`,
     }),
     getMovieVideos: builder.query({
-      query: (data) => `${data.id}/videos`,
+      query: (data) => `movie/${data.id}/videos`,
+    }),
+    getSearchMovies: builder.query({
+      query: (data) => `search/movie?query=${data.searchInput}`,
     }),
   }),
 });
@@ -35,6 +39,7 @@ export const {
   useGetMovieByIdQuery,
   useGetMovieDetailsCastQuery,
   useGetMovieVideosQuery,
+  useGetSearchMoviesQuery,
 } = restApi;
 
 export default restApi;

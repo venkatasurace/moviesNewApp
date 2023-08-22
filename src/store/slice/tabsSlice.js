@@ -10,6 +10,7 @@ const tabsSlice = createSlice({
       state.tabs = action.payload;
     },
     searchHandler: (state, action) => {
+      // console.log("action.payload", action.payload);
       state.searchInput = action.payload;
     },
   },

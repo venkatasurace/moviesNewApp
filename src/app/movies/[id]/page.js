@@ -26,7 +26,7 @@ const MoviesDetailsPage = () => {
   // console.log("movieVideos", movieVideos?.results);
 
   const trailer = movieVideos?.results?.filter((e) => e.type == "Trailer");
-  console.log(trailer, "trailer");
+  // console.log(trailer, "trailer");
 
   return (
     <div>

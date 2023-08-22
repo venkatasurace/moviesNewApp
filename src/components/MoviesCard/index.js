@@ -16,7 +16,7 @@ const MoviesCard = ({
 
   return (
     <Link href={`/movies/${id}`}>
-      <div className="bg-white min-h-[520px] shadow-md rounded m-3">
+      <div className="bg-white min-h-[540px] shadow-md rounded m-3">
         <div className="h-3/4 w-full">
           <Image
             height={700}

@@ -22,13 +22,13 @@ const Movies = () => {
   };
   //   console.log(tab);
   const { data, isLoading } = useGetMoviesQuery({ tab });
-  console.log("data", data);
+  // console.log("data", data);
   const moviesData = data?.results;
-  console.log("data", moviesData);
+  // console.log("data", moviesData);
 
   return (
-    <div className="flex flex-col justify-center items-center space-y-7 min-h-screen w-full  p-5">
-      <h1 className="text-4xl font-extrabold mb-3 ">Movies</h1>
+    <div className="flex flex-col justify-center items-center space-y-7 min-h-screen w-full pt-32 sm:pt-12  p-5">
+      <h1 className="text-4xl text-white font-extrabold mb-3 ">Movies</h1>
       <div className="space-x-3  hidden   sm:flex justify-around items-center  flex-wrap">
         {tabs.map((val, idx) => (
           <button
@@ -37,8 +37,8 @@ const Movies = () => {
               setTitle(val.title);
               //   dispatch(tabsHandler(val));
             }}
-            className={`bg-stone-500 my-3 p-2 hover:shadow-2xl ${
-              tab === val.tab ? "bg-red-500 shadow-red-500" : ""
+            className={` my-3 p-2 hover:shadow-2xl text-white   ${
+              tab == val.tab ? "border-b border-red-100 pb-2 font-bold " : ""
             } `}
             key={idx}
           >
@@ -57,7 +57,9 @@ const Movies = () => {
           </option>
         ))}
       </select>
-      <h1 className="text-3xl font-extrabold mb-3 hidden sm:block ">{title}</h1>
+      <h1 className="text-3xl text-white font-extrabold mb-3 hidden sm:block ">
+        {title}
+      </h1>
 
       <div className="flex justify-center items-center w-full  ">
         {isLoading ? (
