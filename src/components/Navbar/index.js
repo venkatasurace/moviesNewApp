@@ -32,11 +32,7 @@ const Navbar = () => {
         <Link href={"/"}>Movies DB</Link>
       </h1>
       <div className="space-x-4 flex flex-col sm:flex-row items-center">
-        {/* <Link href="/">
-          <h1 className={`ml-4 ${path === "/" ? "font-bold text-white" : ""}`}>
-            Movies
-          </h1>
-        </Link> */}
+        {/*  */}
         {/* <Link href={"/articles"}>
           <h1
             className={`ml-4  ${
