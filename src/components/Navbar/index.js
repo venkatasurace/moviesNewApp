@@ -21,18 +21,18 @@ const Navbar = () => {
     setSearchResult(searchInput);
     dispatch(searchHandler(searchInput));
     setToggle(false);
+    setInput("");
   };
 
   const { data } = useGetSearchMoviesQuery({ searchInput });
   const searchData = data?.results;
 
   return (
-    <div className="bg-slate-600 h-[30vh] sm:h-[10vh] flex flex-col sm:flex sm:flex-row justify-around  items-center fixed top-0 w-full z-10  ">
+    <div className="bg-slate-600 h-[22vh] sm:h-[10vh] flex flex-col sm:flex sm:flex-row justify-around  items-center fixed top-0 w-full z-10  ">
       <h1 className="text-3xl text-white font-extrabold italic">
         <Link href={"/"}>Movies DB</Link>
       </h1>
       <div className="space-x-4 flex flex-col sm:flex-row items-center">
-        {/*  */}
         {/* <Link href={"/articles"}>
           <h1
             className={`ml-4  ${
@@ -64,7 +64,7 @@ const Navbar = () => {
               placeholder="Search Movie Name"
             />
             {tabToggle && (
-              <div className="bg-white absolute w-full h-[200px] overflow-hidden overflow-y-auto -bottom-48">
+              <div className="bg-gray-800 absolute w-full h-[200px] overflow-hidden overflow-y-auto -bottom-48">
                 {searchData.length ? (
                   searchData.map((e, idx) => (
                     <SearchTabComponent
@@ -84,7 +84,7 @@ const Navbar = () => {
           <Link href={`/search-movies/${searchInput}`}>
             <button
               onClick={submitHandler}
-              className="bg-blue-500 text-white py-2 ml-2 px-4 rounded-r-md hover:bg-blue-600"
+              className="bg-blue-500 text-white py-2 ml-2 px-4 rounded hover:bg-blue-600"
             >
               Search
             </button>

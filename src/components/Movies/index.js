@@ -5,6 +5,10 @@ import React, { useState } from "react";
 import { useGetMoviesQuery } from "@/store/api/restApis";
 import { ProgressBar } from "react-loader-spinner";
 import MoviesCard from "../MoviesCard";
+import Pagination from "../Pagination";
+
+import { useSelector } from "react-redux";
+import tabsSlice from "@/store/slice/tabsSlice";
 
 const Movies = () => {
   const [tab, setTab] = useState("now_playing");
@@ -21,13 +25,16 @@ const Movies = () => {
     // dispatch(tabsHandler(event.target.value));
   };
   //   console.log(tab);
-  const { data, isLoading } = useGetMoviesQuery({ tab });
-  // console.log("data", data);
+
+  const pageId = useSelector((state) => state.tabsSlice.tabs);
+
+  const { data, isLoading } = useGetMoviesQuery({ tab, pageId });
+  console.log("data", data);
   const moviesData = data?.results;
   // console.log("data", moviesData);
 
   return (
-    <div className="flex flex-col justify-center items-center space-y-7 min-h-screen w-full pt-32 sm:pt-12  p-5">
+    <div className="flex flex-col justify-center items-center space-y-7 min-h-screen w-full   ">
       <h1 className="text-4xl text-white font-extrabold mb-3 ">Movies</h1>
       <div className="space-x-3  hidden   sm:flex justify-around items-center  flex-wrap">
         {tabs.map((val, idx) => (
@@ -80,6 +87,7 @@ const Movies = () => {
           </div>
         )}
       </div>
+      <Pagination pages={data?.total_pages} />
     </div>
   );
 };

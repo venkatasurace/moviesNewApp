@@ -17,7 +17,7 @@ const restApi = createApi({
   }),
   endpoints: (builder) => ({
     getMovies: builder.query({
-      query: (data) => `movie/${data.tab}`,
+      query: (data) => `movie/${data.tab}?page=${data.pageId}`,
     }),
     getMovieById: builder.query({
       query: (data) => `movie/${data.id}`,
@@ -31,6 +31,12 @@ const restApi = createApi({
     getSearchMovies: builder.query({
       query: (data) => `search/movie?query=${data.searchInput}`,
     }),
+    getSimilarMovies: builder.query({
+      query: (data) => `movie/${data.id}/similar`,
+    }),
+    getMovieReview: builder.query({
+      query: (data) => `movie/${data.id}/watch/providers`,
+    }),
   }),
 });
 
@@ -40,6 +46,8 @@ export const {
   useGetMovieDetailsCastQuery,
   useGetMovieVideosQuery,
   useGetSearchMoviesQuery,
+  useGetSimilarMoviesQuery,
+  useGetMovieReviewQuery,
 } = restApi;
 
 export default restApi;

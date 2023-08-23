@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
       <Provider store={store}>
         <body className={inter.className}>
           <Navbar />
-          <div className="pt-16"> {children}</div>
+          <div className="pt-[180px] sm:pt-[110px] "> {children}</div>
         </body>
       </Provider>
     </html>
