@@ -7,12 +7,16 @@ import { ProgressBar } from "react-loader-spinner";
 import MoviesCard from "../MoviesCard";
 import Pagination from "../Pagination";
 
+import { usePathname } from "next/navigation";
+
 import { useSelector } from "react-redux";
 import tabsSlice from "@/store/slice/tabsSlice";
 
 const Movies = () => {
+  const path = usePathname();
   const [tab, setTab] = useState("now_playing");
   const [title, setTitle] = useState("Now Playing");
+  const [favorite, setFavorite] = useState([]);
   const tabs = [
     { title: "Now Playing", tab: "now_playing" },
     { title: "Popular", tab: "popular" },
@@ -22,16 +26,30 @@ const Movies = () => {
   const handleDropdownChange = (event) => {
     setTab(event.target.value);
     setTitle(event.target.value2);
-    // dispatch(tabsHandler(event.target.value));
   };
-  //   console.log(tab);
 
   const pageId = useSelector((state) => state.tabsSlice.tabs);
 
   const { data, isLoading } = useGetMoviesQuery({ tab, pageId });
-  console.log("data", data);
+
   const moviesData = data?.results;
-  // console.log("data", moviesData);
+
+  const saveToLocalStorage = (items) => {
+    localStorage.setItem("favData", JSON.stringify(items));
+  };
+
+  const addFav = (e) => {
+    const filterId = moviesData.find((item) => item.id === e);
+    setFavorite([...favorite, filterId]);
+    saveToLocalStorage(favorite);
+  };
+
+  const delFav = (e) => {
+    const delMovie = favorite.filter((item) => item.id !== e);
+    saveToLocalStorage(delMovie);
+    // const res=localStorage.getItem("")
+    // setFavorite()
+  };
 
   return (
     <div className="flex flex-col justify-center items-center space-y-7 min-h-screen w-full   ">
@@ -82,7 +100,13 @@ const Movies = () => {
         ) : (
           <div className="grid grid-cols-1 gap-y-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  w-full  md:gap-5 my-7">
             {moviesData?.map((val, idx) => (
-              <MoviesCard key={idx} {...val} />
+              <MoviesCard
+                path={path}
+                delFav={delFav}
+                addFav={addFav}
+                key={idx}
+                {...val}
+              />
             ))}
           </div>
         )}

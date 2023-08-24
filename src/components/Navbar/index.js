@@ -28,21 +28,21 @@ const Navbar = () => {
   const searchData = data?.results;
 
   return (
-    <div className="bg-slate-600 h-[22vh] sm:h-[10vh] flex flex-col sm:flex sm:flex-row justify-around  items-center fixed top-0 w-full z-10  ">
+    <div className="bg-slate-600 h-[24vh] sm:h-[10vh] flex flex-col sm:flex sm:flex-row justify-around  items-center fixed top-0 w-full z-10  ">
       <h1 className="text-3xl text-white font-extrabold italic">
         <Link href={"/"}>Movies DB</Link>
       </h1>
       <div className="space-x-4 flex flex-col sm:flex-row items-center">
-        {/* <Link href={"/articles"}>
+        <Link href={"/favorite"}>
           <h1
             className={`ml-4  ${
-              path === "/articles" ? "font-bold text-white" : ""
+              path === "/favorite" ? "font-bold text-white" : ""
             } `}
           >
-            Articles
+            Favorite
           </h1>
         </Link>
-        <Link href={"/top-headlines"}>
+        {/* <Link href={"/top-headlines"}>
           <h1
             className={`ml-4  ${
               path === "/top-headlines" ? "font-bold text-white" : ""

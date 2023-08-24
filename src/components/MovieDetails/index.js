@@ -149,7 +149,7 @@ const MovieDetails = (props) => {
           </div>
         </div>
       </div>
-      {videos?.length && (
+      {/* {videos?.length && (
         <>
           <h1 className=" font-bold text-white my-3 text-2xl  text-center">
             Videos
@@ -162,7 +162,7 @@ const MovieDetails = (props) => {
             </div>
           </div>
         </>
-      )}
+      )} */}
       {similarMovies?.length && (
         <>
           <h1 className=" font-bold text-white my-3 text-2xl  text-center">
