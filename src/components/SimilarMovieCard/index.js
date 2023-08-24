@@ -11,8 +11,7 @@ const SimilarMovieCard = ({ title, id, poster_path }) => {
           height={700}
           width={700}
           className="h-full "
-          src={`${imagePath}${poster_path}
-`}
+          src={`${poster_path ? `${imagePath}${poster_path}` : "/noimage.png"}`}
           alt={`image${id}`}
         />
       </div>

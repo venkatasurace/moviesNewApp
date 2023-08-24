@@ -21,7 +21,7 @@ function MoviesCard({
 
   const [toggle, setToggle] = useState("");
 
-  console.log(addFav, delFav);
+  // console.log(addFav, delFav);
 
   return (
     <div className="bg-white min-h-[540px] shadow-md rounded m-3">

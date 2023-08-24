@@ -16,6 +16,7 @@ import {
   useGetSimilarMoviesQuery,
   useGetMovieVideosQuery,
   useGetMovieReviewQuery,
+  useGetPersonDetailsQuery,
 } from "@/store/api/restApis";
 
 import SimilarMovieCard from "../SimilarMovieCard";
@@ -43,7 +44,7 @@ const MovieDetails = (props) => {
 
   const { data } = useGetSimilarMoviesQuery({ id });
 
-  const { data: reviews } = useGetMovieReviewQuery({ id });
+  const { data: reviews } = useGetPersonDetailsQuery();
 
   // console.log("reviews", reviews);
 
@@ -59,9 +60,17 @@ const MovieDetails = (props) => {
 
   return (
     <div className="w-full sm:pt-12 md:pt-0  ">
-      <div className="w-full  md:bg-purple-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10   h-auto  md:h-[70vh] lg:h-[90vh] flex justify-center items-center  relative   ">
+      <div
+        className={`w-full ${
+          props.backdrop_path && "md:bg-purple-400"
+        }    rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10   h-auto  md:h-[70vh] lg:h-[90vh] flex justify-center items-center  relative   `}
+      >
         <Image
-          src={`${imagePath}${props.backdrop_path}`}
+          src={`${
+            props.backdrop_path
+              ? `${imagePath}${props.backdrop_path}`
+              : "/backgroundImage.jpg"
+          }`}
           height={100}
           width={1000}
           className="w-full h-full hidden md:block object-center absolute -z-10  "
@@ -72,7 +81,15 @@ const MovieDetails = (props) => {
             <Image
               height={300}
               width={400}
-              src={`${imagePath}${props.poster_path}`}
+              // src={`${imagePath}${
+              //   props.poster_path ? props.poster_path : "/noimage.png"
+              // }`}
+
+              src={`${
+                props.poster_path
+                  ? `${imagePath}${props.poster_path}`
+                  : "/noimage.png"
+              }`}
               className="w-[300px] h-[320px]  md:h-full md:w-auto sm:hidden"
               alt="image"
             />
@@ -163,6 +180,22 @@ const MovieDetails = (props) => {
           </div>
         </>
       )} */}
+
+      {videos?.length && (
+        <>
+          <h1 className=" font-bold text-white my-3 text-2xl  text-center">
+            Videos
+          </h1>
+          <div className="flex flex-col  overflow-x-auto w-full p-3">
+            <div className="flex  space-x-4  ">
+              {videos?.slice(0, 10).map((e, idx) => (
+                <VideoCard key={idx} videos={e} />
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+
       {similarMovies?.length && (
         <>
           <h1 className=" font-bold text-white my-3 text-2xl  text-center">

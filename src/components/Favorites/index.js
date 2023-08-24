@@ -13,7 +13,7 @@ const Favorites = () => {
   const favMovieData = JSON.parse(localStorage.getItem("favData"));
 
   const delFav = (e) => {
-    console.log(e);
+    // console.log(e);
   };
 
   return (

@@ -31,10 +31,11 @@ const Pagination = ({ pages }) => {
   return (
     <div className="flex flex-col justify-center  overflow-x-auto max-w-full ">
       <div className="flex  space-x-2 pt-4 ">
-        {pageNumber.map((eachNumber) =>
+        {pageNumber.map((eachNumber, idx) =>
           selectedNumber === eachNumber ? (
             // eslint-disable-next-line react/jsx-key
             <button
+              key={idx}
               className="px-3  py-2 bg-slate-900  text-slate-50 rounded-md"
               onClick={() => onCLickPageNumber(eachNumber)}
               type="button"
@@ -44,6 +45,7 @@ const Pagination = ({ pages }) => {
           ) : (
             // eslint-disable-next-line react/jsx-key
             <button
+              key={idx}
               className="px-3 py-2  bg-slate-500  text-slate-50 rounded-md"
               onClick={() => onCLickPageNumber(eachNumber)}
               type="button"

@@ -37,6 +37,12 @@ const restApi = createApi({
     getMovieReview: builder.query({
       query: (data) => `movie/${data.id}/watch/providers`,
     }),
+    getPersonDetails: builder.query({
+      query: (data) => `person/${data.id}`,
+    }),
+    getPersonImages: builder.query({
+      query: (data) => `person/${data.id}/images`,
+    }),
   }),
 });
 
@@ -48,6 +54,8 @@ export const {
   useGetSearchMoviesQuery,
   useGetSimilarMoviesQuery,
   useGetMovieReviewQuery,
+  useGetPersonDetailsQuery,
+  useGetPersonImagesQuery,
 } = restApi;
 
 export default restApi;
