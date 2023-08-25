@@ -9,16 +9,30 @@ const restApi = createApi({
   reducerPath: "restApi",
   baseQuery: fetchBaseQuery({
     baseUrl: baseUrl,
+
     prepareHeaders: (headers) => {
+      //   accept: 'application/json',
+      // 'content-type': 'application/json',
+
       headers.set("authorization", `Bearer ${API_KEY}`);
 
       return headers;
     },
   }),
   endpoints: (builder) => ({
+    addFavorites: builder.mutation({
+      query: (data) => ({
+        url: `account/20236627/favorite`,
+        method: "POST",
+
+        body: data,
+      }),
+    }),
+
     getMovies: builder.query({
       query: (data) => `movie/${data.tab}?page=${data.pageId}`,
     }),
+
     getMovieById: builder.query({
       query: (data) => `movie/${data.id}`,
     }),
@@ -37,16 +51,23 @@ const restApi = createApi({
     getMovieReview: builder.query({
       query: (data) => `movie/${data.id}/watch/providers`,
     }),
+    getMovieImages: builder.query({
+      query: (data) => `movie/${data.id}/images`,
+    }),
     getPersonDetails: builder.query({
       query: (data) => `person/${data.id}`,
     }),
     getPersonImages: builder.query({
       query: (data) => `person/${data.id}/images`,
     }),
+    getFavoriteMovies: builder.query({
+      query: (data) => `account/20236627/favorite/movies`,
+    }),
   }),
 });
 
 export const {
+  useAddFavoritesMutation,
   useGetMoviesQuery,
   useGetMovieByIdQuery,
   useGetMovieDetailsCastQuery,
@@ -56,6 +77,8 @@ export const {
   useGetMovieReviewQuery,
   useGetPersonDetailsQuery,
   useGetPersonImagesQuery,
+  useGetMovieImagesQuery,
+  useGetFavoriteMoviesQuery,
 } = restApi;
 
 export default restApi;

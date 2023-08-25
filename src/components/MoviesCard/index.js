@@ -3,7 +3,12 @@ import Link from "next/link";
 import React, { useState } from "react";
 
 import { MdOutlineFavorite } from "react-icons/md";
-import { RxCross1 } from "react-icons/rx";
+
+import { useAddFavoritesMutation } from "@/store/api/restApis";
+
+import { usePathname } from "next/navigation";
+
+import { RxCross2 } from "react-icons/rx";
 
 function MoviesCard({
   title,
@@ -14,14 +19,15 @@ function MoviesCard({
   vote_average,
   addFav,
   delFav,
-  path,
 }) {
   const imagePath =
     "https://image.tmdb.org/t/p/w500/https://image.tmdb.org/t/p/w500";
 
   const [toggle, setToggle] = useState("");
 
-  // console.log(addFav, delFav);
+  const [addFavorite] = useAddFavoritesMutation();
+
+  const path = usePathname();
 
   return (
     <div className="bg-white min-h-[540px] shadow-md rounded m-3">
@@ -39,35 +45,55 @@ function MoviesCard({
       </Link>
 
       <div className="w-full h-1/4 p-3">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between  items-center w-full">
           <h1 className=" hover:text-yellow-600 text-gray-700">
             <span className="text-base font-semibold uppercase tracking-wide ">
               {title}
             </span>
           </h1>
 
-          <div
-            onClick={() => {
-              addFav(id);
-              setToggle(id);
-            }}
-          >
-            {id === toggle ? (
-              <MdOutlineFavorite size={20} className="text-red-500 " />
-            ) : (
-              <MdOutlineFavorite
-                onClick={() => delFav(id)}
-                size={20}
-                className=""
-              />
-            )}
-          </div>
-
-          {/* {path === "/favorite" && (
-            <div onClick={() => delFav(id)}>
-              <RxCross1 />
+          {path === "/" && (
+            <div
+              className=""
+              onClick={() => {
+                addFav(id);
+                setToggle(id);
+                addFavorite({
+                  media_type: "movie",
+                  media_id: id,
+                  favorite: true,
+                });
+              }}
+            >
+              {id === toggle ? (
+                <MdOutlineFavorite size={20} className="text-red-500 " />
+              ) : (
+                <MdOutlineFavorite
+                  onClick={() => delFav(id)}
+                  size={20}
+                  className=""
+                />
+              )}
             </div>
-          )} */}
+          )}
+
+          {path === "/favorite" && (
+            <div
+              className=""
+              onClick={() => {
+                addFavorite({
+                  media_type: "movie",
+                  media_id: id,
+                  favorite: false,
+                });
+                setTimeout(() => {
+                  window.location.reload();
+                }, 10);
+              }}
+            >
+              <RxCross2 />
+            </div>
+          )}
         </div>
 
         <p className="text-gray-600 text-sm leading-5 mt-1">

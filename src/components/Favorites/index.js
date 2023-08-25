@@ -4,13 +4,14 @@ import React, { useEffect } from "react";
 import MoviesCard from "../MoviesCard";
 
 import { usePathname } from "next/navigation";
+import { useGetFavoriteMoviesQuery } from "@/store/api/restApis";
 
 const Favorites = () => {
   const path = usePathname();
 
-  // useEffect(() => {}, []);
+  const { data } = useGetFavoriteMoviesQuery();
 
-  const favMovieData = JSON.parse(localStorage.getItem("favData"));
+  // useEffect(() => {}, []);
 
   const delFav = (e) => {
     // console.log(e);
@@ -22,7 +23,7 @@ const Favorites = () => {
         Favorites Movies
       </h1>
       <div className="grid grid-cols-1 gap-y-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  w-full  md:gap-5 my-7">
-        {favMovieData?.map((val, idx) => (
+        {data?.results.map((val, idx) => (
           <MoviesCard
             addFav={() => {}}
             delFav={delFav}

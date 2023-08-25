@@ -20,6 +20,7 @@ import {
 } from "@/store/api/restApis";
 
 import SimilarMovieCard from "../SimilarMovieCard";
+import Link from "next/link";
 
 const VideoCard = dynamic(() => import("../VideoCard"), {
   ssr: false,
@@ -162,6 +163,27 @@ const MovieDetails = (props) => {
                 <span className=" text-white font-bold text-base">Rating</span>{" "}
                 : {props?.vote_average}
               </h1>
+            </div>
+            <div className="flex justify-end items-center my-4">
+              <Link href={`/images/${id}`}>
+                <button class="bg-transparent text-white py-2 px-4 rounded-md flex items-center space-x-2 transition duration-300 ease-in-out hover:border-2">
+                  More Images
+                  <svg
+                    class="w-4 h-4 transform transition-transform duration-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    ></path>
+                  </svg>
+                </button>
+              </Link>
             </div>
           </div>
         </div>
