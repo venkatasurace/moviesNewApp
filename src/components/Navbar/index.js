@@ -1,3 +1,4 @@
+import { useClient } from 'next/server';
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -10,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { searchHandler } from "@/store/slice/tabsSlice";
 
 const Navbar = () => {
+  useClient(); 
   const dispatch = useDispatch();
   const [searchInput, setInput] = useState("");
   const [searchResult, setSearchResult] = useState("");
